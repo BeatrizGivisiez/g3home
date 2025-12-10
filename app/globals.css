@@ -1,0 +1,197 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* Tema luxo contemporâneo: laranja queimado, marrom escuro, bege suave */
+  --background: #faf6f1;
+  --foreground: #2c2416;
+  --card: #ffffff;
+  --card-foreground: #2c2416;
+  --popover: #ffffff;
+  --popover-foreground: #2c2416;
+  --primary: #d97836;
+  --primary-foreground: #ffffff;
+  --secondary: #8b6f47;
+  --secondary-foreground: #ffffff;
+  --muted: #e8dcc8;
+  --muted-foreground: #705a3f;
+  --accent: #c97933;
+  --accent-foreground: #ffffff;
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.577 0.245 27.325);
+  --border: #e5ddd2;
+  --input: #f5f1eb;
+  --ring: #d97836;
+  --chart-1: #d97836;
+  --chart-2: #8b6f47;
+  --chart-3: #c97933;
+  --chart-4: #6b5a3d;
+  --chart-5: #e8dcc8;
+  --radius: 0.625rem;
+  --sidebar: #ffffff;
+  --sidebar-foreground: #2c2416;
+  --sidebar-primary: #d97836;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #8b6f47;
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: #e5ddd2;
+  --sidebar-ring: #d97836;
+}
+
+.dark {
+  --background: #1a1410;
+  --foreground: #f5f1eb;
+  --card: #2c2416;
+  --card-foreground: #f5f1eb;
+  --popover: #2c2416;
+  --popover-foreground: #f5f1eb;
+  --primary: #e5a56b;
+  --primary-foreground: #1a1410;
+  --secondary: #a8916a;
+  --secondary-foreground: #1a1410;
+  --muted: #3f3630;
+  --muted-foreground: #c9bfb3;
+  --accent: #e5a56b;
+  --accent-foreground: #1a1410;
+  --destructive: oklch(0.396 0.141 25.723);
+  --destructive-foreground: oklch(0.637 0.237 25.331);
+  --border: #3f3630;
+  --input: #2c2416;
+  --ring: #e5a56b;
+  --chart-1: #e5a56b;
+  --chart-2: #a8916a;
+  --chart-3: #e5a56b;
+  --chart-4: #8b7a5e;
+  --chart-5: #3f3630;
+  --sidebar: #2c2416;
+  --sidebar-foreground: #f5f1eb;
+  --sidebar-primary: #e5a56b;
+  --sidebar-primary-foreground: #1a1410;
+  --sidebar-accent: #a8916a;
+  --sidebar-accent-foreground: #1a1410;
+  --sidebar-border: #3f3630;
+  --sidebar-ring: #e5a56b;
+}
+
+@theme inline {
+  /* Adicionando fontes premium: Playfair Display e Poppins */
+  --font-sans: "Poppins", "Geist", "Geist Fallback";
+  --font-serif: "Playfair Display", serif;
+  --font-mono: "Geist Mono", "Geist Mono Fallback";
+  --font-montserrat: var(--font-montserrat);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Adicionando animações suaves e efeitos premium */
+@layer utilities {
+  .fade-in {
+    @apply animate-in fade-in-0 duration-700;
+  }
+
+  .fade-in-up {
+    @apply animate-in fade-in-0 slide-in-from-bottom-4 duration-700;
+  }
+
+  .fade-in-down {
+    @apply animate-in fade-in-0 slide-in-from-top-4 duration-700;
+  }
+
+  .grain-bg {
+    background-image: repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.02) 0px,
+        transparent 1px,
+        transparent 2px,
+        rgba(0, 0, 0, 0.02) 3px
+      ),
+      repeating-linear-gradient(
+        90deg,
+        rgba(0, 0, 0, 0.02) 0px,
+        transparent 1px,
+        transparent 2px,
+        rgba(0, 0, 0, 0.02) 3px
+      );
+  }
+
+  .wood-texture {
+    background-image: repeating-linear-gradient(
+        90deg,
+        rgba(101, 67, 33, 0.08) 0px,
+        transparent 1px,
+        transparent 3px,
+        rgba(101, 67, 33, 0.04) 4px
+      ),
+      repeating-linear-gradient(
+        0deg,
+        rgba(139, 111, 71, 0.05) 0px,
+        transparent 2px,
+        transparent 4px,
+        rgba(139, 111, 71, 0.02) 6px
+      );
+  }
+
+  .hover-lift {
+    @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
+  }
+
+  .line-accent {
+    position: relative;
+  }
+
+  .line-accent::before {
+    content: "";
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 40px;
+    height: 2px;
+    background-color: var(--primary);
+    opacity: 0.6;
+  }
+}
