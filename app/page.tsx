@@ -5,6 +5,7 @@ import Menu from "@/components/menu/menu";
 import AboutSection from "@/components/home-about/about";
 import DifferentialSection from "@/components/home-differential/differential";
 import ProjectSection from "@/components/home-project/project";
+import PartnersSection from "@/components/home-partners/partners";
 import ContactSection from "@/components/home-contact/contact";
 import Footer from "@/components/footer/footer";
 
@@ -25,6 +26,7 @@ export default function Home() {
       <AboutSection />
       <DifferentialSection />
       <ProjectSection />
+      <PartnersSection />
       <ContactSection />
       <Footer />
     </main>

@@ -74,20 +74,25 @@ export default function DifferentialSection() {
                 {/* Decorative accent */}
                 <div className="absolute -top-1 -right-1 w-8 h-8 bg-primary/10 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
-                {/* Icon */}
-                <div className="mb-6">
-                  <div className="w-14 h-14 bg-primary/10 rounded-sm flex items-center justify-center group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300">
-                    <Icon
-                      size={28}
-                      className="text-primary group-hover:text-primary-foreground transition-colors"
-                    />
+                {/* Icon and Title - Side by side on desktop */}
+                <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-6 mb-4">
+                  {/* Icon */}
+                  <div className="flex-shrink-0">
+                    <div className="w-14 h-14 bg-primary/10 rounded-sm flex items-center justify-center group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300">
+                      <Icon
+                        size={28}
+                        className="text-primary group-hover:text-primary-foreground transition-colors"
+                      />
+                    </div>
                   </div>
+
+                  {/* Title */}
+                  <h3 className="text-xl font-semibold text-foreground line-accent">
+                    {feature.title}
+                  </h3>
                 </div>
 
-                {/* Content */}
-                <h3 className="text-xl font-semibold text-foreground mb-3 line-accent">
-                  {feature.title}
-                </h3>
+                {/* Description */}
                 <p className="text-foreground/60 leading-relaxed">
                   {feature.description}
                 </p>
