@@ -155,16 +155,15 @@ export default function ProjectSection() {
                     fill
                     className="object-cover transition-transform duration-500 group-hover:scale-110"
                   />
-                  {/* Material Tag - Vertical */}
-                  <div
-                    className="absolute top-4 left-4 bg-primary text-primary-foreground px-3 py-6 rounded-sm shadow-lg"
-                    style={{ writingMode: "vertical-rl" }}
-                  >
-                    <span className="text-xs font-bold tracking-wider rotate-180 inline-block">
-                      {project.constructionSystem === "Aço"
-                        ? "LSF"
-                        : project.constructionSystem.toUpperCase()}
-                    </span>
+                  {/* Material Ribbon - Diagonal */}
+                  <div className="absolute top-0 right-0 w-32 h-32 overflow-hidden">
+                    <div className="absolute top-6 -right-8 w-40 bg-primary text-primary-foreground text-center py-2 shadow-lg transform rotate-45 origin-center">
+                      <span className="text-xs font-bold tracking-wider uppercase">
+                        {project.constructionSystem === "Aço"
+                          ? "LSF"
+                          : project.constructionSystem}
+                      </span>
+                    </div>
                   </div>
                   {/* Overlay */}
                   <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/20 transition-colors duration-300 flex items-center justify-center">
@@ -175,12 +174,6 @@ export default function ProjectSection() {
                       />
                     </div>
                   </div>
-                </div>
-
-                {/* Link Arrow */}
-                <div className="mt-6 flex items-center gap-2 text-primary opacity-0 group-hover:opacity-100 transition-all duration-300 translate-x-0 group-hover:translate-x-2">
-                  <span className="text-sm font-medium">Ver projecto</span>
-                  <CaretRightIcon size={16} />
                 </div>
               </div>
             </div>
