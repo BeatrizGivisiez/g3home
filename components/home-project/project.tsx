@@ -1,38 +1,54 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import Image from "next/image";
-import { ArrowSquareOut, CaretRight } from "@phosphor-icons/react/dist/ssr";
-
-const projects = [
-  {
-    id: 1,
-    title: "Residência Lago",
-    category: "Habitação Luxury",
-    image: "/modern-luxury-house-with-wood-elements.jpg",
-    description:
-      "Projecto de habitação moderna com integração de elementos de madeira refinada.",
-  },
-  {
-    id: 2,
-    title: "Atelier Dourado",
-    category: "Espaço Comercial",
-    image: "/elegant-commercial-space-gold-accents.jpg",
-    description:
-      "Espaço comercial premium com acabamentos em tons dourados e marrom.",
-  },
-  {
-    id: 3,
-    title: "Villa Contemporânea",
-    category: "Design Residencial",
-    image: "/contemporary-villa-architecture-luxury.jpg",
-    description:
-      "Villa contemporânea que une tecnologia com design de interiores premium.",
-  },
-];
+import {
+  ArrowSquareOutIcon,
+  CaretRightIcon,
+  MapPinIcon,
+  CalendarIcon,
+  RulerIcon,
+  HouseLineIcon,
+} from "@phosphor-icons/react/dist/ssr";
+import { projects } from "./constants";
+import type { Project } from "./constants";
+import ProjectGalleryModal from "./project-gallery-modal";
 
 export default function ProjectSection() {
   const [hoveredProject, setHoveredProject] = useState<number | null>(null);
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [filter, setFilter] = useState<"Todos" | "Madeira" | "Aço">("Todos");
+
+  const filteredProjects = useMemo(() => {
+    if (filter === "Todos") return projects;
+    return projects.filter((project) => project.constructionSystem === filter);
+  }, [filter]);
+
+  const openGallery = (project: Project) => {
+    setSelectedProject(project);
+    setCurrentImageIndex(0);
+  };
+
+  const closeGallery = () => {
+    setSelectedProject(null);
+    setCurrentImageIndex(0);
+  };
+
+  const nextImage = () => {
+    if (
+      selectedProject &&
+      currentImageIndex < selectedProject.gallery.length - 1
+    ) {
+      setCurrentImageIndex(currentImageIndex + 1);
+    }
+  };
+
+  const prevImage = () => {
+    if (currentImageIndex > 0) {
+      setCurrentImageIndex(currentImageIndex - 1);
+    }
+  };
 
   return (
     <section id="projects" className="relative py-24 px-6 bg-muted/20">
@@ -55,65 +71,168 @@ export default function ProjectSection() {
         </div>
 
         {/* Projects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {projects.map((project) => (
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 justify-items-center">
+          {filteredProjects.length === 1 && <div className="hidden md:block" />}
+          {filteredProjects.map((project) => (
             <div
               key={project.id}
               onMouseEnter={() => setHoveredProject(project.id)}
               onMouseLeave={() => setHoveredProject(null)}
+              onClick={() => openGallery(project)}
               className="group fade-in-up cursor-pointer"
             >
-              {/* Image Container */}
-              <div className="relative h-80 overflow-hidden rounded-sm mb-6 bg-muted/50">
-                <Image
-                  src={project.image || "/placeholder.svg"}
-                  alt={project.title}
-                  fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-110"
-                />
-                {/* Overlay */}
-                <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/20 transition-colors duration-300 flex items-center justify-center">
-                  <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <ArrowSquareOut
-                      size={32}
-                      className="text-primary-foreground"
-                    />
-                  </div>
-                </div>
-              </div>
-
-              {/* Content */}
-              <div className="space-y-2">
-                <p className="text-xs font-medium text-primary uppercase tracking-widest">
-                  {project.category}
-                </p>
+              <div className="space-y-3">
                 <h3 className="text-xl font-semibold text-foreground group-hover:text-primary transition-colors line-accent">
                   {project.title}
                 </h3>
-                <p className="text-foreground/60 text-sm leading-relaxed pt-2">
+                <p className="text-foreground/60 text-sm leading-relaxed">
                   {project.description}
                 </p>
-              </div>
+                {/* Project Details */}
+                <div className="grid grid-cols-4 gap-3 pt-2">
+                  {/* Localização */}
+                  <div className="flex items-start gap-2 col-span-3">
+                    <MapPinIcon
+                      size={16}
+                      className="text-primary flex-shrink-0 mt-0.5"
+                    />
+                    <div>
+                      <p className="text-xs text-muted-foreground">
+                        Localização
+                      </p>
+                      <p className="text-sm font-medium text-foreground">
+                        {project.location}
+                      </p>
+                    </div>
+                  </div>
+                  {/* Área */}
+                  <div className="flex items-start gap-2 col-span-1">
+                    <RulerIcon
+                      size={16}
+                      className="text-primary flex-shrink-0 mt-0.5"
+                    />
+                    <div>
+                      <p className="text-xs text-muted-foreground">Área</p>
+                      <p className="text-sm font-medium text-foreground">
+                        {project.area}
+                      </p>
+                    </div>
+                  </div>
+                  {/* Finalidade */}
+                  <div className="flex items-start gap-2 col-span-3">
+                    <HouseLineIcon
+                      size={16}
+                      className="text-primary flex-shrink-0 mt-0.5"
+                    />
+                    <div>
+                      <p className="text-xs text-muted-foreground">
+                        Finalidade
+                      </p>
+                      <p className="text-sm font-medium text-foreground">
+                        {project.purpose}
+                      </p>
+                    </div>
+                  </div>
+                  {/* Ano */}
+                  <div className="flex items-start gap-2 col-span-1">
+                    <CalendarIcon
+                      size={16}
+                      className="text-primary flex-shrink-0 mt-0.5"
+                    />
+                    <div>
+                      <p className="text-xs text-muted-foreground">Ano</p>
+                      <p className="text-sm font-medium text-foreground">
+                        {project.year}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                {/* Image Container */}
+                <div className="relative h-80 overflow-hidden rounded-sm mb-6 bg-muted/50">
+                  <Image
+                    src={project.image || "/placeholder.svg"}
+                    alt={project.title}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                  {/* Material Tag - Vertical */}
+                  <div
+                    className="absolute top-4 left-4 bg-primary text-primary-foreground px-3 py-6 rounded-sm shadow-lg"
+                    style={{ writingMode: "vertical-rl" }}
+                  >
+                    <span className="text-xs font-bold tracking-wider rotate-180 inline-block">
+                      {project.constructionSystem === "Aço"
+                        ? "LSF"
+                        : project.constructionSystem.toUpperCase()}
+                    </span>
+                  </div>
+                  {/* Overlay */}
+                  <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/20 transition-colors duration-300 flex items-center justify-center">
+                    <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <ArrowSquareOutIcon
+                        size={32}
+                        className="text-primary-foreground"
+                      />
+                    </div>
+                  </div>
+                </div>
 
-              {/* Link Arrow */}
-              <div className="mt-6 flex items-center gap-2 text-primary opacity-0 group-hover:opacity-100 transition-all duration-300 translate-x-0 group-hover:translate-x-2">
-                <span className="text-sm font-medium">Ver projecto</span>
-                <CaretRight size={16} />
+                {/* Link Arrow */}
+                <div className="mt-6 flex items-center gap-2 text-primary opacity-0 group-hover:opacity-100 transition-all duration-300 translate-x-0 group-hover:translate-x-2">
+                  <span className="text-sm font-medium">Ver projecto</span>
+                  <CaretRightIcon size={16} />
+                </div>
               </div>
             </div>
           ))}
         </div>
 
-        {/* View All Button */}
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-8">
-          <button className="group px-8 py-4 border-2 border-primary text-primary rounded-sm font-semibold text-base hover:bg-primary hover:text-primary-foreground transition-all duration-300">
-            Projectos com LSF
+        {/* Filter Buttons */}
+        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-12">
+          <button
+            onClick={() => setFilter("Todos")}
+            className={`px-8 py-4 border-2 rounded-sm font-semibold text-base transition-all duration-300 ${
+              filter === "Todos"
+                ? "bg-primary text-primary-foreground border-primary"
+                : "border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+            }`}
+          >
+            Todos os Projectos
           </button>
-          <button className="px-8 py-4 border-2 border-primary text-primary rounded-sm font-semibold text-base hover:bg-primary hover:text-primary-foreground transition-all duration-300">
+          <button
+            onClick={() => setFilter("Madeira")}
+            className={`px-8 py-4 border-2 rounded-sm font-semibold text-base transition-all duration-300 ${
+              filter === "Madeira"
+                ? "bg-primary text-primary-foreground border-primary"
+                : "border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+            }`}
+          >
             Projectos Madeira
+          </button>
+          <button
+            onClick={() => setFilter("Aço")}
+            className={`px-8 py-4 border-2 rounded-sm font-semibold text-base transition-all duration-300 ${
+              filter === "Aço"
+                ? "bg-primary text-primary-foreground border-primary"
+                : "border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+            }`}
+          >
+            Projectos com LSF
           </button>
         </div>
       </div>
+
+      {/* Gallery Modal */}
+      {selectedProject && (
+        <ProjectGalleryModal
+          project={selectedProject}
+          isOpen={!!selectedProject}
+          onClose={closeGallery}
+          currentImageIndex={currentImageIndex}
+          onNextImage={nextImage}
+          onPrevImage={prevImage}
+        />
+      )}
     </section>
   );
 }
