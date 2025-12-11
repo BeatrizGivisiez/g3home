@@ -116,7 +116,7 @@ export default function ProjectGalleryModal({
         <div className="flex-1 flex items-center justify-center px-6 md:px-8 pb-24">
             <div className="relative w-full max-w-6xl h-[75vh] bg-muted/10 rounded-lg overflow-hidden flex items-center justify-center">
               <Image
-                src={project.gallery[currentImageIndex] || "/placeholder.svg"}
+                src={project.gallery[currentImageIndex]}
                 alt={`${project.title} - Imagem ${currentImageIndex + 1}`}
                 fill
                 className="object-contain"
@@ -166,7 +166,7 @@ export default function ProjectGalleryModal({
                       }`}
                     >
                       <Image
-                        src={img || "/placeholder.svg"}
+                        src={img}
                         alt={`Miniatura ${index + 1}`}
                         fill
                         className="object-cover"

@@ -150,7 +150,7 @@ export default function ProjectSection() {
                 {/* Image Container */}
                 <div className="relative h-80 overflow-hidden rounded-sm mb-6 bg-muted/50">
                   <Image
-                    src={project.image || "/placeholder.svg"}
+                    src={project.image}
                     alt={project.title}
                     fill
                     className="object-cover transition-transform duration-500 group-hover:scale-110"
