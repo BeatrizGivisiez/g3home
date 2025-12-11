@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Menu from "@/components/menu/menu";
 import AboutSection from "@/components/home-about/about";
 import DifferentialSection from "@/components/home-differential/differential";
+import ServicesSection from "@/components/home-services/services";
 import ProjectSection from "@/components/home-project/project";
 import PartnersSection from "@/components/home-partners/partners";
 import ContactSection from "@/components/home-contact/contact";
@@ -25,6 +26,7 @@ export default function Home() {
       <Menu isScrolled={isScrolled} />
       <AboutSection />
       <DifferentialSection />
+      <ServicesSection />
       <ProjectSection />
       <PartnersSection />
       <ContactSection />
