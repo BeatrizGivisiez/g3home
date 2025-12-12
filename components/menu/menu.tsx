@@ -3,10 +3,21 @@
 import { useState } from "react";
 import { ListIcon, XIcon } from "@phosphor-icons/react/dist/ssr";
 import { MenuProps } from "./types";
-import { navLinks } from "./constants";
+import { useI18n } from "@/lib/i18n/context";
+import LanguageSwitcher from "../language-switcher";
 
 export default function Menu({ isScrolled }: MenuProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { t } = useI18n();
+
+  const navLinks = [
+    { label: t.nav.about, href: "#about" },
+    { label: t.nav.differential, href: "#differential" },
+    { label: t.nav.projects, href: "#projects" },
+    { label: t.nav.services, href: "#services" },
+    { label: t.nav.partners, href: "#partners" },
+    { label: t.nav.contact, href: "#contact" },
+  ];
 
   return (
     <>
@@ -42,15 +53,19 @@ export default function Menu({ isScrolled }: MenuProps) {
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
               </a>
             ))}
+            <LanguageSwitcher />
           </div>
 
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden text-foreground hover:text-primary transition-colors"
-          >
-            {isMobileMenuOpen ? <XIcon size={24} /> : <ListIcon size={24} />}
-          </button>
+          {/* Mobile Menu Button & Language Switcher */}
+          <div className="md:hidden flex items-center gap-3">
+            <LanguageSwitcher mobileOnly />
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="text-foreground hover:text-primary transition-colors"
+            >
+              {isMobileMenuOpen ? <XIcon size={24} /> : <ListIcon size={24} />}
+            </button>
+          </div>
         </div>
 
         {/* Mobile Menu */}

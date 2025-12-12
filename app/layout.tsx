@@ -2,6 +2,7 @@ import type React from "react";
 import type { Metadata } from "next";
 import { Playfair_Display, Poppins, Montserrat } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
+import { I18nProvider } from "@/lib/i18n/context";
 import "./globals.css";
 
 const playfairDisplay = Playfair_Display({
@@ -39,7 +40,9 @@ export default function RootLayout({
       className={`${playfairDisplay.variable} ${poppins.variable} ${montserrat.variable}`}
     >
       <body className="font-sans antialiased bg-background text-foreground">
-        {children}
+        <I18nProvider>
+          {children}
+        </I18nProvider>
         <Analytics />
       </body>
     </html>
