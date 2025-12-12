@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { features } from "./constants";
+import { timelineSteps, lsfWallLayers } from "../home-services/constants";
 
 export default function DifferentialSection() {
   const [visibleCards, setVisibleCards] = useState<number[]>([]);
@@ -52,7 +53,7 @@ export default function DifferentialSection() {
         </div>
 
         {/* Features Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {features.map((feature, index) => {
             const Icon = feature.icon;
             const isVisible = visibleCards.includes(feature.id);
@@ -74,26 +75,24 @@ export default function DifferentialSection() {
                 {/* Decorative accent */}
                 <div className="absolute -top-1 -right-1 w-8 h-8 bg-primary/10 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
-                {/* Icon and Title - Side by side on desktop */}
-                <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-6 mb-4">
-                  {/* Icon */}
+                {/* Icon and Title */}
+                <div className="flex items-center gap-4 mb-4">
                   <div className="flex-shrink-0">
-                    <div className="w-14 h-14 bg-primary/10 rounded-sm flex items-center justify-center group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300">
+                    <div className="w-12 h-12 bg-primary/10 rounded-sm flex items-center justify-center group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300">
                       <Icon
-                        size={28}
+                        size={24}
                         className="text-primary group-hover:text-primary-foreground transition-colors"
+                        weight="duotone"
                       />
                     </div>
                   </div>
-
-                  {/* Title */}
-                  <h3 className="text-xl font-semibold text-foreground line-accent">
+                  <h3 className="text-lg font-semibold text-foreground line-accent">
                     {feature.title}
                   </h3>
                 </div>
 
                 {/* Description */}
-                <p className="text-foreground/60 leading-relaxed">
+                <p className="text-sm text-foreground/60 leading-relaxed">
                   {feature.description}
                 </p>
 
@@ -102,6 +101,115 @@ export default function DifferentialSection() {
               </div>
             );
           })}
+        </div>
+
+        {/* Timeline Section */}
+        <div className="mt-24">
+          {/* Section Header */}
+          <div className="text-center mb-16 space-y-4">
+            <p className="text-sm font-medium text-primary uppercase tracking-widest">
+              Mapa do Processo de Compra
+            </p>
+          </div>
+
+          {/* Timeline */}
+          <div className="relative">
+            {/* Timeline Line - Hidden on mobile */}
+            <div className="hidden md:block absolute top-6 left-0 right-0 h-0.5 bg-gradient-to-r from-primary/20 via-primary to-primary/20" />
+
+            {/* Timeline Steps */}
+            <div className="grid grid-cols-1 md:grid-cols-5 gap-8 md:gap-4">
+              {timelineSteps.map((step, index) => {
+                const Icon = step.icon;
+                return (
+                  <div
+                    key={step.id}
+                    className="group relative flex flex-col items-center text-center"
+                  >
+                    {/* Icon Square */}
+                    <div className="relative z-20 w-12 h-12 rounded-sm bg-primary flex items-center justify-center mb-4 group-hover:bg-primary/10 transition-all duration-300">
+                      <Icon
+                        size={24}
+                        className="text-primary-foreground group-hover:text-primary transition-colors"
+                        weight="duotone"
+                      />
+                    </div>
+
+                    {/* Step Number */}
+                    <span className="text-sm font-bold text-primary mb-2">
+                      {step.number} Etapa
+                    </span>
+
+                    {/* Title */}
+                    <h3 className="text-base font-semibold text-foreground mb-2 px-2">
+                      {step.title}
+                    </h3>
+
+                    {/* Description */}
+                    {step.description && (
+                      <p className="text-sm text-muted-foreground px-2">
+                        {step.description}
+                      </p>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+
+        {/* LSF Wall Section */}
+        <div className="mt-24">
+          {/* Section Header */}
+          <div className="text-center mb-16 space-y-4">
+            <p className="text-sm font-medium text-primary uppercase tracking-widest">
+              Tecnologia Construtiva LSF
+            </p>
+          </div>
+
+          {/* LSF Wall Layers */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {lsfWallLayers.map((layer, index) => {
+              const Icon = layer.icon;
+              return (
+                <div
+                  key={layer.id}
+                  className="group relative p-6 bg-card rounded-sm border border-border/50 hover:border-primary/30 transition-all duration-300 hover:shadow-lg"
+                >
+                  {/* Number Badge */}
+                  <div className="absolute -top-3 -right-3 w-8 h-8 bg-primary rounded-full flex items-center justify-center">
+                    <span className="text-sm font-bold text-primary-foreground">
+                      {layer.id}
+                    </span>
+                  </div>
+
+                  {/* Icon and Title */}
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className="flex-shrink-0">
+                      <div className="w-12 h-12 bg-primary/10 rounded-sm flex items-center justify-center group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300">
+                        <Icon
+                          size={24}
+                          className="text-primary group-hover:text-primary-foreground transition-colors"
+                          weight="duotone"
+                        />
+                      </div>
+                    </div>
+                    <h3 className="text-lg font-semibold text-foreground line-accent">
+                      {layer.title}
+                    </h3>
+                  </div>
+
+                  {/* Description */}
+                  <p className="text-sm text-foreground/60 leading-relaxed">
+                    {layer.description}
+                  </p>
+
+                  {/* Hover line effect */}
+                  <div className="absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-primary via-primary to-transparent w-0 group-hover:w-full transition-all duration-300" />
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
 

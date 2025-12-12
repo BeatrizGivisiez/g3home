@@ -114,7 +114,7 @@ export default function ProjectGalleryModal({
 
         {/* Image Container */}
         <div className="flex-1 flex items-center justify-center px-6 md:px-8 pb-24">
-            <div className="relative w-full max-w-6xl h-[75vh] bg-muted/10 rounded-lg overflow-hidden flex items-center justify-center">
+            <div className="relative w-full max-w-7xl h-[75vh] bg-muted/10 rounded-lg overflow-hidden flex items-center justify-center">
               <Image
                 src={project.gallery[currentImageIndex]}
                 alt={`${project.title} - Imagem ${currentImageIndex + 1}`}
@@ -129,7 +129,7 @@ export default function ProjectGalleryModal({
 
         {/* Navigation Controls - Fixed Bottom */}
         <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6 bg-gradient-to-t from-foreground/90 to-transparent">
-          <div className="flex items-center gap-4 max-w-6xl mx-auto">
+          <div className="flex items-center gap-4 max-w-7xl mx-auto">
               {/* Previous Button */}
               <button
                 onClick={onPrevImage}

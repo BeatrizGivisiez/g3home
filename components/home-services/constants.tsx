@@ -16,7 +16,7 @@ export const timelineSteps = [
     id: 1,
     number: "1º",
     title: "Desenvolver Projeto",
-    description: "Fazemos alteração à sua medida",
+    description: "Alteração à sua medida",
     icon: FileTextIcon,
   },
   {
@@ -30,7 +30,7 @@ export const timelineSteps = [
     id: 3,
     number: "3º",
     title: "Adjudicação",
-    description: "Aproximadamente 1 mês e meio em fábrica",
+    description: "Média 45 dias em fábrica",
     icon: HammerIcon,
   },
   {
@@ -43,8 +43,8 @@ export const timelineSteps = [
   {
     id: 5,
     number: "5º",
-    title: "Construção da casa",
-    description: "2 a 4 meses de acordo com o modelo escolhido",
+    title: "Construção",
+    description: "2–4 meses depende modelo",
     icon: HouseIcon,
   },
 ];
