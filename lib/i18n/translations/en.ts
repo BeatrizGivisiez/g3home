@@ -42,6 +42,51 @@ export const en: TranslationKeys = {
     },
     processTitle: "Purchase Process Map",
     lsfTitle: "LSF Technology",
+    stepLabel: "Step",
+    timeline: [
+      {
+        title: "Develop Project",
+        description: "Customized to your needs",
+      },
+      {
+        title: "Licensing",
+        description: "",
+      },
+      {
+        title: "Award",
+        description: "Average 45 days in factory",
+      },
+      {
+        title: "Transport to site",
+        description: "",
+      },
+      {
+        title: "Construction",
+        description: "2–4 months depends on model",
+      },
+    ],
+    lsf: [
+      {
+        title: "Light Steel Beam",
+        description: "Robust and durable structure. Use of light steel profiles for an effective framework.",
+      },
+      {
+        title: "Thermal Insulation",
+        description: "Usually made with mineral wool. Inserted between profiles to ensure energy efficiency.",
+      },
+      {
+        title: "Interior Finish",
+        description: "Composed of plasterboard. Provides a smooth surface ready for painting.",
+      },
+      {
+        title: "OSB Coating",
+        description: "Both wall faces are coated with OSB panels that reinforce the structure.",
+      },
+      {
+        title: "Humidity Control",
+        description: "Inclusion of vapor barriers. Contributes to ensuring a healthy and durable internal environment.",
+      },
+    ],
   },
 
   // Services/Catalog Section

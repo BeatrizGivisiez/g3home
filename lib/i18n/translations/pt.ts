@@ -40,6 +40,51 @@ export const pt = {
     },
     processTitle: "Mapa do Processo de Compra",
     lsfTitle: "Tecnologia LSF",
+    stepLabel: "Etapa",
+    timeline: [
+      {
+        title: "Desenvolver Projeto",
+        description: "Alteração à sua medida",
+      },
+      {
+        title: "Licenciamento",
+        description: "",
+      },
+      {
+        title: "Adjudicação",
+        description: "Média 45 dias em fábrica",
+      },
+      {
+        title: "Transporte para o local",
+        description: "",
+      },
+      {
+        title: "Construção",
+        description: "2–4 meses depende modelo",
+      },
+    ],
+    lsf: [
+      {
+        title: "Viga de Aço Leve",
+        description: "Estrutura robusta e duradoura. Utilização de perfis de aço leve para uma estrutura eficaz.",
+      },
+      {
+        title: "Isolamento Térmico",
+        description: "Geralmente feito com lã mineral. Inserido entre os perfis para garantir eficiência energética.",
+      },
+      {
+        title: "Acabamento Interior",
+        description: "Composto por placas de gesso cartonado. Proporciona uma superfície lisa e pronta para pintura.",
+      },
+      {
+        title: "Revestimento OSB",
+        description: "Ambas as faces da parede são revestidas com painéis OSB que reforça a estrutura.",
+      },
+      {
+        title: "Controlo de Humidade",
+        description: "Inclusão de barreiras contra vapores. Contribui para assegurar um ambiente interno saudável e duradouro.",
+      },
+    ],
   },
 
   // Services/Catalog Section

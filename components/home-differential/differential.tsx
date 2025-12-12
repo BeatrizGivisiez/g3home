@@ -3,8 +3,10 @@
 import { useEffect, useRef, useState } from "react";
 import { features } from "./constants";
 import { timelineSteps, lsfWallLayers } from "../home-services/constants";
+import { useI18n } from "@/lib/i18n/context";
 
 export default function DifferentialSection() {
+  const { t } = useI18n();
   const [visibleCards, setVisibleCards] = useState<number[]>([]);
   const sectionRef = useRef<HTMLDivElement>(null);
 
@@ -42,10 +44,10 @@ export default function DifferentialSection() {
         {/* Section Header */}
         <div className="text-center mb-16 space-y-4">
           <p className="text-sm font-medium text-primary uppercase tracking-widest">
-            Nosso Diferencial
+            {t.differential.sectionTitle}
           </p>
           <h2 className="text-4xl sm:text-5xl font-serif font-bold text-foreground">
-            O que nos torna <span className="text-primary italic">único</span>
+            {t.differential.sectionTitle}
           </h2>
           <div className="flex justify-center pt-4">
             <div className="w-16 h-1 bg-primary/60 rounded-full" />
@@ -57,6 +59,15 @@ export default function DifferentialSection() {
           {features.map((feature, index) => {
             const Icon = feature.icon;
             const isVisible = visibleCards.includes(feature.id);
+            
+            // Map features to translations
+            const translations = [
+              t.differential.engineering,
+              t.differential.custom,
+              t.differential.sustainability,
+              t.differential.premium,
+            ];
+            const translation = translations[index];
 
             return (
               <div
@@ -87,13 +98,13 @@ export default function DifferentialSection() {
                     </div>
                   </div>
                   <h3 className="text-lg font-semibold text-foreground line-accent">
-                    {feature.title}
+                    {translation.title}
                   </h3>
                 </div>
 
                 {/* Description */}
                 <p className="text-sm text-foreground/60 leading-relaxed">
-                  {feature.description}
+                  {translation.description}
                 </p>
 
                 {/* Hover line effect */}
@@ -108,7 +119,7 @@ export default function DifferentialSection() {
           {/* Section Header */}
           <div className="text-center mb-16 space-y-4">
             <p className="text-sm font-medium text-primary uppercase tracking-widest">
-              Mapa do Processo de Compra
+              {t.differential.processTitle}
             </p>
           </div>
 
@@ -121,6 +132,7 @@ export default function DifferentialSection() {
             <div className="grid grid-cols-1 md:grid-cols-5 gap-8 md:gap-4">
               {timelineSteps.map((step, index) => {
                 const Icon = step.icon;
+                const translation = t.differential.timeline[index];
                 return (
                   <div
                     key={step.id}
@@ -137,18 +149,18 @@ export default function DifferentialSection() {
 
                     {/* Step Number */}
                     <span className="text-sm font-bold text-primary mb-2">
-                      {step.number} Etapa
+                      {step.number} {t.differential.stepLabel}
                     </span>
 
                     {/* Title */}
                     <h3 className="text-base font-semibold text-foreground mb-2 px-2">
-                      {step.title}
+                      {translation.title}
                     </h3>
 
                     {/* Description */}
-                    {step.description && (
+                    {translation.description && (
                       <p className="text-sm text-muted-foreground px-2">
-                        {step.description}
+                        {translation.description}
                       </p>
                     )}
                   </div>
@@ -163,7 +175,7 @@ export default function DifferentialSection() {
           {/* Section Header */}
           <div className="text-center mb-16 space-y-4">
             <p className="text-sm font-medium text-primary uppercase tracking-widest">
-              Tecnologia Construtiva LSF
+              {t.differential.lsfTitle}
             </p>
           </div>
 
@@ -171,6 +183,7 @@ export default function DifferentialSection() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {lsfWallLayers.map((layer, index) => {
               const Icon = layer.icon;
+              const translation = t.differential.lsf[index];
               return (
                 <div
                   key={layer.id}
@@ -195,13 +208,13 @@ export default function DifferentialSection() {
                       </div>
                     </div>
                     <h3 className="text-lg font-semibold text-foreground line-accent">
-                      {layer.title}
+                      {translation.title}
                     </h3>
                   </div>
 
                   {/* Description */}
                   <p className="text-sm text-foreground/60 leading-relaxed">
-                    {layer.description}
+                    {translation.description}
                   </p>
 
                   {/* Hover line effect */}

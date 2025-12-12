@@ -13,8 +13,10 @@ import {
 import { projects } from "./constants";
 import type { Project } from "./constants";
 import ProjectGalleryModal from "./project-gallery-modal";
+import { useI18n } from "@/lib/i18n/context";
 
 export default function ProjectSection() {
+  const { t } = useI18n();
   const [hoveredProject, setHoveredProject] = useState<number | null>(null);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -59,11 +61,11 @@ export default function ProjectSection() {
         {/* Section Header */}
         <div className="text-center mb-16 space-y-4">
           <p className="text-sm font-medium text-primary uppercase tracking-widest">
-            Portfólio de Projectos
+            {t.projects.subtitle}
           </p>
           <h2 className="text-4xl sm:text-5xl font-serif font-bold text-foreground">
-            Trabalhos que definem{" "}
-            <span className="text-primary italic">tendências</span>
+            {t.projects.title}{" "}
+            <span className="text-primary italic">{t.projects.titleHighlight}</span>
           </h2>
           <div className="flex justify-center pt-4">
             <div className="w-16 h-1 bg-primary/60 rounded-full" />
@@ -98,7 +100,7 @@ export default function ProjectSection() {
                     />
                     <div>
                       <p className="text-xs text-muted-foreground">
-                        Localização
+                        {t.projects.location}
                       </p>
                       <p className="text-sm font-medium text-foreground">
                         {project.location}
@@ -112,7 +114,7 @@ export default function ProjectSection() {
                       className="text-primary flex-shrink-0 mt-0.5"
                     />
                     <div>
-                      <p className="text-xs text-muted-foreground">Área</p>
+                      <p className="text-xs text-muted-foreground">{t.projects.area}</p>
                       <p className="text-sm font-medium text-foreground">
                         {project.area}
                       </p>
@@ -126,7 +128,7 @@ export default function ProjectSection() {
                     />
                     <div>
                       <p className="text-xs text-muted-foreground">
-                        Finalidade
+                        {t.projects.purpose}
                       </p>
                       <p className="text-sm font-medium text-foreground">
                         {project.purpose}
@@ -140,7 +142,7 @@ export default function ProjectSection() {
                       className="text-primary flex-shrink-0 mt-0.5"
                     />
                     <div>
-                      <p className="text-xs text-muted-foreground">Ano</p>
+                      <p className="text-xs text-muted-foreground">{t.projects.year}</p>
                       <p className="text-sm font-medium text-foreground">
                         {project.year}
                       </p>

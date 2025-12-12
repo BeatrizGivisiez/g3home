@@ -3,6 +3,7 @@
 import { useState, useMemo } from "react";
 import { houseModels, HouseModel } from "./house-catalog-constants";
 import Image from "next/image";
+import { useI18n } from "@/lib/i18n/context";
 import {
   Bed as BedIcon,
   Bathtub as BathtubIcon,
@@ -14,6 +15,7 @@ import {
 } from "@phosphor-icons/react/dist/ssr";
 
 export default function HouseCatalog() {
+  const { t } = useI18n();
   const [selectedTipologia, setSelectedTipologia] = useState<string | null>(
     null
   );
@@ -65,11 +67,11 @@ export default function HouseCatalog() {
       {/* Section Header */}
       <div className="text-center mb-12 space-y-4">
         <p className="text-sm font-medium text-primary uppercase tracking-widest">
-          Catálogo de Modelos
+          {t.services.subtitle}
         </p>
         <h2 className="text-4xl sm:text-5xl font-serif font-bold text-foreground">
-          Escolha o seu{" "}
-          <span className="text-primary italic">modelo ideal</span>
+          {t.services.title}{" "}
+          <span className="text-primary italic">{t.services.titleHighlight}</span>
         </h2>
         <div className="flex justify-center pt-4">
           <div className="w-16 h-1 bg-primary/60 rounded-full" />
@@ -83,14 +85,14 @@ export default function HouseCatalog() {
           <div>
             <label className="flex items-center gap-2 text-sm font-semibold mb-3 uppercase tracking-wide">
               <BedIcon size={20} weight="duotone" />
-              Tipologia
+              {t.services.filters.tipologia}
             </label>
             <select
               value={selectedTipologia || ""}
               onChange={(e) => setSelectedTipologia(e.target.value || null)}
               className="w-full px-4 py-3 border-2 border-border rounded-sm focus:outline-none focus:border-primary transition-colors bg-background cursor-pointer"
             >
-              <option value="">Todas</option>
+              <option value="">{t.services.filters.all}</option>
               {tipologias.map((tipologia) => (
                 <option key={tipologia} value={tipologia}>
                   {tipologia}
@@ -126,7 +128,7 @@ export default function HouseCatalog() {
           <div>
             <label className="flex items-center gap-2 text-sm font-semibold mb-3 uppercase tracking-wide">
               <RulerIcon size={20} weight="duotone" />
-              Área Mín (m²)
+              {t.services.filters.areaMin}
             </label>
             <div className="flex items-center gap-2">
               <span className="text-xs font-medium">0</span>
@@ -150,7 +152,7 @@ export default function HouseCatalog() {
           <div>
             <label className="flex items-center gap-2 text-sm font-semibold mb-3 uppercase tracking-wide">
               <RulerIcon size={20} weight="duotone" />
-              Área Máx (m²)
+              {t.services.filters.areaMax}
             </label>
             <div className="flex items-center gap-2">
               <span className="text-xs font-medium">0</span>
@@ -181,7 +183,7 @@ export default function HouseCatalog() {
               }}
               className="w-full px-6 py-3 bg-primary text-primary-foreground rounded-sm font-semibold hover:shadow-lg transition-all duration-300 whitespace-nowrap"
             >
-              Limpar Filtros
+              {t.services.filters.clearFilters}
             </button>
           </div>
         </div>
@@ -233,7 +235,7 @@ export default function HouseCatalog() {
                       />
                       <div>
                         <p className="text-xs text-muted-foreground">
-                          Área Bruta Interior
+                          {t.services.houseDetails.areaBrutaInterior}
                         </p>
                         <p className="text-sm font-semibold text-foreground">
                           {house.areaBrutaInterior}
@@ -249,7 +251,7 @@ export default function HouseCatalog() {
                         weight="duotone"
                       />
                       <div>
-                        <p className="text-xs text-muted-foreground">WC</p>
+                        <p className="text-xs text-muted-foreground">{t.services.houseDetails.wc}</p>
                         <p className="text-sm font-semibold text-foreground">
                           {house.wc}
                         </p>
@@ -265,7 +267,7 @@ export default function HouseCatalog() {
                       />
                       <div>
                         <p className="text-xs text-muted-foreground">
-                          Área Total
+                          {t.services.houseDetails.areaTotal}
                         </p>
                         <p className="text-sm font-semibold text-foreground">
                           {house.areaTotal}
@@ -285,7 +287,7 @@ export default function HouseCatalog() {
 
       {/* Scroll hint text */}
       <p className="text-center text-sm text-muted-foreground mt-4">
-        Deslize para ver mais modelos →
+        {t.services.scrollHint}
       </p>
 
       {/* House Detail Modal */}
@@ -386,7 +388,7 @@ export default function HouseCatalog() {
                   />
                   <div>
                     <p className="text-xs md:text-sm text-muted-foreground mb-1">
-                      Área Bruta Interior
+                      {t.services.houseDetails.areaBrutaInterior}
                     </p>
                     <p className="text-base md:text-lg font-semibold text-foreground">
                       {selectedHouse.areaBrutaInterior}
@@ -402,7 +404,7 @@ export default function HouseCatalog() {
                   />
                   <div>
                     <p className="text-xs md:text-sm text-muted-foreground mb-1">
-                      Área Total
+                      {t.services.houseDetails.areaTotal}
                     </p>
                     <p className="text-base md:text-lg font-semibold text-foreground">
                       {selectedHouse.areaTotal}
@@ -417,7 +419,7 @@ export default function HouseCatalog() {
                     weight="duotone"
                   />
                   <div>
-                    <p className="text-xs md:text-sm text-muted-foreground mb-1">WC</p>
+                    <p className="text-xs md:text-sm text-muted-foreground mb-1">{t.services.houseDetails.wc}</p>
                     <p className="text-base md:text-lg font-semibold text-foreground">
                       {selectedHouse.wc}
                     </p>
@@ -432,7 +434,7 @@ export default function HouseCatalog() {
                   />
                   <div>
                     <p className="text-xs md:text-sm text-muted-foreground mb-1">
-                      Tipologia
+                      {t.services.houseDetails.tipologia}
                     </p>
                     <p className="text-base md:text-lg font-semibold text-foreground">
                       {selectedHouse.tipologia}
