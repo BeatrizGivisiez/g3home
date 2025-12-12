@@ -1,27 +1,62 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import Image from "next/image";
-import { HouseIcon, Ruler, Bathtub, X } from "@phosphor-icons/react/dist/ssr";
 import { houseModels, HouseModel } from "./house-catalog-constants";
+import Image from "next/image";
+import {
+  BedIcon,
+  BathtubIcon,
+  RulerIcon,
+  HouseIcon,
+  XIcon,
+} from "@phosphor-icons/react/dist/ssr";
 
 export default function HouseCatalog() {
   const [selectedTipologia, setSelectedTipologia] = useState<string | null>(
     null
   );
   const [selectedHouse, setSelectedHouse] = useState<HouseModel | null>(null);
+  const [selectedWC, setSelectedWC] = useState<number | null>(null);
+  const [selectedAreaMin, setSelectedAreaMin] = useState<number>(0);
+  const [selectedAreaMax, setSelectedAreaMax] = useState<number>(403);
 
-  // Get unique tipologias for filters
+  // Get unique values for filters
   const tipologias = useMemo(() => {
     const unique = Array.from(new Set(houseModels.map((h) => h.tipologia)));
     return unique.sort();
   }, []);
 
-  // Filter houses by selected tipologia
+  const wcOptions = useMemo(() => {
+    const unique = Array.from(new Set(houseModels.map((h) => h.wc)));
+    return unique.sort((a, b) => a - b);
+  }, []);
+
+  // Filter houses by all criteria
   const filteredHouses = useMemo(() => {
-    if (!selectedTipologia) return houseModels;
-    return houseModels.filter((h) => h.tipologia === selectedTipologia);
-  }, [selectedTipologia]);
+    let filtered = houseModels;
+
+    // Filter by tipologia
+    if (selectedTipologia) {
+      filtered = filtered.filter((h) => h.tipologia === selectedTipologia);
+    }
+
+    // Filter by WC (single selection)
+    if (selectedWC !== null) {
+      filtered = filtered.filter((h) => h.wc === selectedWC);
+    }
+
+    // Filter by area (extracting number from string like "123m²")
+    if (selectedAreaMin > 0 || selectedAreaMax < 403) {
+      filtered = filtered.filter((h) => {
+        const area = parseFloat(h.areaBrutaInterior.replace(/[^\d.]/g, ""));
+        if (area < selectedAreaMin) return false;
+        if (area > selectedAreaMax) return false;
+        return true;
+      });
+    }
+
+    return filtered;
+  }, [selectedTipologia, selectedWC, selectedAreaMin, selectedAreaMax]);
 
   return (
     <div>
@@ -39,31 +74,115 @@ export default function HouseCatalog() {
         </div>
       </div>
 
-      {/* Filter Buttons */}
-      <div className="flex flex-wrap gap-3 justify-center mb-8">
-        <button
-          onClick={() => setSelectedTipologia(null)}
-          className={`px-6 py-3 rounded-sm font-semibold text-sm transition-all duration-300 ${
-            selectedTipologia === null
-              ? "bg-primary text-primary-foreground border-2 border-primary"
-              : "border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground"
-          }`}
-        >
-          Todos
-        </button>
-        {tipologias.map((tipologia) => (
-          <button
-            key={tipologia}
-            onClick={() => setSelectedTipologia(tipologia)}
-            className={`px-6 py-3 rounded-sm font-semibold text-sm transition-all duration-300 ${
-              selectedTipologia === tipologia
-                ? "bg-primary text-primary-foreground border-2 border-primary"
-                : "border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground"
-            }`}
-          >
-            {tipologia}
-          </button>
-        ))}
+      {/* Filters Bar */}
+      <div className="mb-12 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 items-start">
+          {/* Tipologia Filter */}
+          <div>
+            <label className="flex items-center gap-2 text-sm font-semibold mb-3 uppercase tracking-wide">
+              <BedIcon size={20} weight="duotone" />
+              Tipologia
+            </label>
+            <select
+              value={selectedTipologia || ""}
+              onChange={(e) => setSelectedTipologia(e.target.value || null)}
+              className="w-full px-4 py-3 border-2 border-border rounded-sm focus:outline-none focus:border-primary transition-colors bg-background cursor-pointer"
+            >
+              <option value="">Todas</option>
+              {tipologias.map((tipologia) => (
+                <option key={tipologia} value={tipologia}>
+                  {tipologia}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          {/* WC Filter */}
+          <div>
+            <label className="flex items-center gap-2 text-sm font-semibold mb-3 uppercase tracking-wide">
+              <BathtubIcon size={20} weight="duotone" />
+              WC
+            </label>
+            <div className="flex flex-wrap gap-2">
+              {wcOptions.map((wc) => (
+                <button
+                  key={wc}
+                  onClick={() => setSelectedWC(selectedWC === wc ? null : wc)}
+                  className={`px-4 py-2 rounded-sm font-medium transition-all ${
+                    selectedWC === wc
+                      ? "bg-primary text-primary-foreground"
+                      : "bg-muted hover:bg-muted/80"
+                  }`}
+                >
+                  {wc}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Área Mínima */}
+          <div>
+            <label className="flex items-center gap-2 text-sm font-semibold mb-3 uppercase tracking-wide">
+              <RulerIcon size={20} weight="duotone" />
+              Área Mín (m²)
+            </label>
+            <div className="flex items-center gap-2">
+              <span className="text-xs font-medium">0</span>
+              <input
+                type="range"
+                min="0"
+                max="403"
+                step="5"
+                value={selectedAreaMin}
+                onChange={(e) => setSelectedAreaMin(Number(e.target.value))}
+                className="flex-1 h-2 bg-muted rounded-lg appearance-none cursor-pointer accent-primary"
+              />
+              <span className="text-xs font-medium">403</span>
+            </div>
+            <div className="text-center mt-2 text-sm font-semibold">
+              {selectedAreaMin}m²
+            </div>
+          </div>
+
+          {/* Área Máxima */}
+          <div>
+            <label className="flex items-center gap-2 text-sm font-semibold mb-3 uppercase tracking-wide">
+              <RulerIcon size={20} weight="duotone" />
+              Área Máx (m²)
+            </label>
+            <div className="flex items-center gap-2">
+              <span className="text-xs font-medium">0</span>
+              <input
+                type="range"
+                min="0"
+                max="403"
+                step="5"
+                value={selectedAreaMax}
+                onChange={(e) => setSelectedAreaMax(Number(e.target.value))}
+                className="flex-1 h-2 bg-muted rounded-lg appearance-none cursor-pointer accent-primary"
+              />
+              <span className="text-xs font-medium">403</span>
+            </div>
+            <div className="text-center mt-2 text-sm font-semibold">
+              {selectedAreaMax}m²
+            </div>
+          </div>
+
+          {/* Clear Filters Button */}
+          <div className="flex items-end">
+            <button
+              onClick={() => {
+                setSelectedTipologia(null);
+                setSelectedWC(null);
+                setSelectedAreaMin(0);
+                setSelectedAreaMax(403);
+              }}
+              className="w-full px-6 py-3 bg-primary text-primary-foreground rounded-sm font-semibold hover:shadow-lg transition-all duration-300 whitespace-nowrap"
+            >
+              Limpar Filtros
+            </button>
+          </div>
+        </div>
       </div>
 
       {/* Horizontal Scrollable Cards */}
@@ -122,7 +241,7 @@ export default function HouseCatalog() {
 
                     {/* WC */}
                     <div className="flex items-start gap-2">
-                      <Bathtub
+                      <BathtubIcon
                         size={18}
                         className="text-primary flex-shrink-0 mt-0.5"
                         weight="duotone"
@@ -137,7 +256,7 @@ export default function HouseCatalog() {
 
                     {/* Área Total */}
                     <div className="flex items-start gap-2 col-span-2">
-                      <Ruler
+                      <RulerIcon
                         size={18}
                         className="text-primary flex-shrink-0 mt-0.5"
                         weight="duotone"
@@ -182,7 +301,7 @@ export default function HouseCatalog() {
               onClick={() => setSelectedHouse(null)}
               className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-foreground/80 hover:bg-foreground flex items-center justify-center transition-colors"
             >
-              <X size={24} className="text-background" weight="bold" />
+              <XIcon size={24} className="text-background" weight="bold" />
             </button>
 
             {/* Modal Content */}
@@ -207,7 +326,9 @@ export default function HouseCatalog() {
                   fill
                   className={`object-contain ${
                     // Rotate landscape-oriented floor plans
-                    ["Portland", "San Diego", "Viena", "Glasgow"].includes(selectedHouse.name)
+                    ["Portland", "San Diego", "Viena", "Glasgow"].includes(
+                      selectedHouse.name
+                    )
                       ? "rotate-90"
                       : ""
                   }`}
@@ -233,7 +354,7 @@ export default function HouseCatalog() {
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <Ruler
+                  <RulerIcon
                     size={24}
                     className="text-primary flex-shrink-0 mt-1"
                     weight="duotone"
@@ -249,7 +370,7 @@ export default function HouseCatalog() {
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <Bathtub
+                  <BathtubIcon
                     size={24}
                     className="text-primary flex-shrink-0 mt-1"
                     weight="duotone"
