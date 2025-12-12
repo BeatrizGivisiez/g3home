@@ -73,9 +73,9 @@ export const lsfWallLayers = [
   },
   {
     id: 4,
-    title: "Revestimento com Painéis OSB",
+    title: "Revestimento OSB",
     description:
-      "Ambas as faces da parede são revestidas. Reforça a estrutura.",
+      "Ambas as faces da parede são revestidas com painéis OSB que reforça a estrutura.",
     icon: GridFourIcon,
   },
   {

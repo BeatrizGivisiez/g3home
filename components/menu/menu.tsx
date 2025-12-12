@@ -44,13 +44,6 @@ export default function Menu({ isScrolled }: MenuProps) {
             ))}
           </div>
 
-          {/* CTA Button */}
-          <div className="hidden md:flex gap-3">
-            <button className="px-6 py-2 border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-300 rounded-sm font-medium text-sm">
-              Contactos
-            </button>
-          </div>
-
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -74,9 +67,6 @@ export default function Menu({ isScrolled }: MenuProps) {
                   {link.label}
                 </a>
               ))}
-              <button className="w-full px-6 py-2 bg-primary text-primary-foreground rounded-sm font-medium text-sm hover:opacity-90 transition-opacity mt-4">
-                Contactos
-              </button>
             </div>
           </div>
         )}
