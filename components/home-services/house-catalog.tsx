@@ -205,7 +205,12 @@ export default function HouseCatalog() {
                   src={selectedHouse.image}
                   alt={selectedHouse.name}
                   fill
-                  className="object-contain"
+                  className={`object-contain ${
+                    // Rotate landscape-oriented floor plans
+                    ["Portland", "San Diego", "Viena", "Glasgow"].includes(selectedHouse.name)
+                      ? "rotate-90"
+                      : ""
+                  }`}
                 />
               </div>
 

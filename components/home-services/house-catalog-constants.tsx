@@ -12,7 +12,7 @@ export const houseModels: HouseModel[] = [
   {
     id: 1,
     name: "Portland",
-    tipologia: "V3",
+    tipologia: "T3",
     areaBrutaInterior: "123m²",
     areaTotal: "228m²",
     wc: 2,
@@ -21,7 +21,7 @@ export const houseModels: HouseModel[] = [
   {
     id: 2,
     name: "San Diego",
-    tipologia: "V3",
+    tipologia: "T3",
     areaBrutaInterior: "114m²",
     areaTotal: "175m²",
     wc: 2,
@@ -30,7 +30,7 @@ export const houseModels: HouseModel[] = [
   {
     id: 3,
     name: "Glasgow",
-    tipologia: "V0",
+    tipologia: "T0",
     areaBrutaInterior: "19m²",
     areaTotal: "27m²",
     wc: 1,
@@ -39,7 +39,7 @@ export const houseModels: HouseModel[] = [
   {
     id: 4,
     name: "Vail",
-    tipologia: "V2",
+    tipologia: "T2",
     areaBrutaInterior: "60m²",
     areaTotal: "90m²",
     wc: 1,
@@ -48,7 +48,7 @@ export const houseModels: HouseModel[] = [
   {
     id: 5,
     name: "Ribeira Brava",
-    tipologia: "V1",
+    tipologia: "T1",
     areaBrutaInterior: "40m²",
     areaTotal: "50m²",
     wc: 1,
@@ -57,7 +57,7 @@ export const houseModels: HouseModel[] = [
   {
     id: 6,
     name: "Phoenix",
-    tipologia: "V2",
+    tipologia: "T2",
     areaBrutaInterior: "108m²",
     areaTotal: "177m²",
     wc: 2,
@@ -66,7 +66,7 @@ export const houseModels: HouseModel[] = [
   {
     id: 7,
     name: "Lagos",
-    tipologia: "V1",
+    tipologia: "T1",
     areaBrutaInterior: "44m²",
     areaTotal: "55m²",
     wc: 1,
@@ -75,7 +75,7 @@ export const houseModels: HouseModel[] = [
   {
     id: 8,
     name: "Mimosa",
-    tipologia: "V0",
+    tipologia: "T0",
     areaBrutaInterior: "42m²",
     areaTotal: "56m²",
     wc: 1,
@@ -84,7 +84,7 @@ export const houseModels: HouseModel[] = [
   {
     id: 9,
     name: "Baiona",
-    tipologia: "V3",
+    tipologia: "T3",
     areaBrutaInterior: "122m²",
     areaTotal: "158m²",
     wc: 3,
@@ -93,7 +93,7 @@ export const houseModels: HouseModel[] = [
   {
     id: 10,
     name: "Long Beach",
-    tipologia: "V3",
+    tipologia: "T3",
     areaBrutaInterior: "302m²",
     areaTotal: "403m²",
     wc: 3,
@@ -102,7 +102,7 @@ export const houseModels: HouseModel[] = [
   {
     id: 11,
     name: "Toronto",
-    tipologia: "V3",
+    tipologia: "T3",
     areaBrutaInterior: "90m²",
     areaTotal: "123m²",
     wc: 2,
@@ -111,7 +111,7 @@ export const houseModels: HouseModel[] = [
   {
     id: 12,
     name: "Aspen",
-    tipologia: "V2",
+    tipologia: "T2",
     areaBrutaInterior: "65m²",
     areaTotal: "105m²",
     wc: 1,
@@ -120,7 +120,7 @@ export const houseModels: HouseModel[] = [
   {
     id: 13,
     name: "Vermont",
-    tipologia: "V1",
+    tipologia: "T1",
     areaBrutaInterior: "69m²",
     areaTotal: "93m²",
     wc: 1,
@@ -129,7 +129,7 @@ export const houseModels: HouseModel[] = [
   {
     id: 14,
     name: "Serra da Estrela",
-    tipologia: "V2",
+    tipologia: "T2",
     areaBrutaInterior: "65m²",
     areaTotal: "103m²",
     wc: 1,
@@ -138,7 +138,7 @@ export const houseModels: HouseModel[] = [
   {
     id: 15,
     name: "Chalé Arrábida",
-    tipologia: "V2+1",
+    tipologia: "T2+1",
     areaBrutaInterior: "70m²",
     areaTotal: "115m²",
     wc: 1,
@@ -147,7 +147,7 @@ export const houseModels: HouseModel[] = [
   {
     id: 16,
     name: "Chalé Gerês",
-    tipologia: "V1",
+    tipologia: "T1",
     areaBrutaInterior: "43m²",
     areaTotal: "70m²",
     wc: 1,
@@ -156,7 +156,7 @@ export const houseModels: HouseModel[] = [
   {
     id: 17,
     name: "Miami",
-    tipologia: "V3",
+    tipologia: "T3",
     areaBrutaInterior: "151m²",
     areaTotal: "208m²",
     wc: 3,
@@ -165,7 +165,7 @@ export const houseModels: HouseModel[] = [
   {
     id: 18,
     name: "Oakland",
-    tipologia: "V2",
+    tipologia: "T2",
     areaBrutaInterior: "89m²",
     areaTotal: "137m²",
     wc: 2,
@@ -174,7 +174,7 @@ export const houseModels: HouseModel[] = [
   {
     id: 19,
     name: "Riverside",
-    tipologia: "V1",
+    tipologia: "T1",
     areaBrutaInterior: "48m²",
     areaTotal: "74m²",
     wc: 1,
@@ -183,7 +183,7 @@ export const houseModels: HouseModel[] = [
   {
     id: 20,
     name: "Praga",
-    tipologia: "V4",
+    tipologia: "T4",
     areaBrutaInterior: "194m²",
     areaTotal: "286m²",
     wc: 4,
@@ -192,7 +192,7 @@ export const houseModels: HouseModel[] = [
   {
     id: 21,
     name: "Paris",
-    tipologia: "V2",
+    tipologia: "T2",
     areaBrutaInterior: "82m²",
     areaTotal: "117m²",
     wc: 2,
@@ -201,7 +201,7 @@ export const houseModels: HouseModel[] = [
   {
     id: 22,
     name: "Lisboa",
-    tipologia: "V2",
+    tipologia: "T2",
     areaBrutaInterior: "87m²",
     areaTotal: "108m²",
     wc: 2,
@@ -210,7 +210,7 @@ export const houseModels: HouseModel[] = [
   {
     id: 23,
     name: "Berlim",
-    tipologia: "V3",
+    tipologia: "T3",
     areaBrutaInterior: "128m²",
     areaTotal: "175m²",
     wc: 3,
@@ -219,7 +219,7 @@ export const houseModels: HouseModel[] = [
   {
     id: 24,
     name: "Viena",
-    tipologia: "V2",
+    tipologia: "T2",
     areaBrutaInterior: "75m²",
     areaTotal: "103m²",
     wc: 2,
@@ -228,7 +228,7 @@ export const houseModels: HouseModel[] = [
   {
     id: 25,
     name: "Madrid",
-    tipologia: "V2",
+    tipologia: "T2",
     areaBrutaInterior: "70m²",
     areaTotal: "95m²",
     wc: 2,
@@ -237,7 +237,7 @@ export const houseModels: HouseModel[] = [
   {
     id: 26,
     name: "Atenas",
-    tipologia: "V2",
+    tipologia: "T2",
     areaBrutaInterior: "84m²",
     areaTotal: "115m²",
     wc: 2,
@@ -246,7 +246,7 @@ export const houseModels: HouseModel[] = [
   {
     id: 27,
     name: "Budapeste",
-    tipologia: "V2",
+    tipologia: "T2",
     areaBrutaInterior: "83m²",
     areaTotal: "123m²",
     wc: 2,
@@ -255,7 +255,7 @@ export const houseModels: HouseModel[] = [
   {
     id: 28,
     name: "Mónaco",
-    tipologia: "V0",
+    tipologia: "T0",
     areaBrutaInterior: "35m²",
     areaTotal: "50m²",
     wc: 1,
@@ -264,7 +264,7 @@ export const houseModels: HouseModel[] = [
   {
     id: 29,
     name: "Oslo",
-    tipologia: "V1",
+    tipologia: "T1",
     areaBrutaInterior: "48m²",
     areaTotal: "70m²",
     wc: 1,
@@ -273,7 +273,7 @@ export const houseModels: HouseModel[] = [
   {
     id: 30,
     name: "Londres",
-    tipologia: "V1",
+    tipologia: "T1",
     areaBrutaInterior: "49m²",
     areaTotal: "70m²",
     wc: 1,

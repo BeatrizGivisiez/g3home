@@ -44,7 +44,7 @@ export const timelineSteps = [
     id: 5,
     number: "5º",
     title: "Construção da casa",
-    description: "De 2 meses a 4 meses de acordo com o modelo escolhido",
+    description: "2 a 4 meses de acordo com o modelo escolhido",
     icon: HouseIcon,
   },
 ];
