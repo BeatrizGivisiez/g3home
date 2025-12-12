@@ -4,11 +4,13 @@ import { useState, useMemo } from "react";
 import { houseModels, HouseModel } from "./house-catalog-constants";
 import Image from "next/image";
 import {
-  BedIcon,
-  BathtubIcon,
-  RulerIcon,
-  HouseIcon,
-  XIcon,
+  Bed as BedIcon,
+  Bathtub as BathtubIcon,
+  Ruler as RulerIcon,
+  House as HouseIcon,
+  X as XIcon,
+  CaretLeft,
+  CaretRight,
 } from "@phosphor-icons/react/dist/ssr";
 
 export default function HouseCatalog() {
@@ -287,11 +289,50 @@ export default function HouseCatalog() {
       </p>
 
       {/* House Detail Modal */}
-      {selectedHouse && (
+      {selectedHouse && (() => {
+        const currentIndex = filteredHouses.findIndex((h) => h.id === selectedHouse.id);
+        const hasPrev = currentIndex > 0;
+        const hasNext = currentIndex < filteredHouses.length - 1;
+        
+        const goToPrev = () => {
+          if (hasPrev) setSelectedHouse(filteredHouses[currentIndex - 1]);
+        };
+        
+        const goToNext = () => {
+          if (hasNext) setSelectedHouse(filteredHouses[currentIndex + 1]);
+        };
+        
+        return (
         <div
           className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4"
           onClick={() => setSelectedHouse(null)}
         >
+          {/* Previous Arrow */}
+          {hasPrev && (
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                goToPrev();
+              }}
+              className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 md:w-14 md:h-14 rounded-full bg-foreground/80 hover:bg-foreground flex items-center justify-center transition-all hover:scale-110 z-50"
+            >
+              <CaretLeft size={32} className="text-background" weight="bold" />
+            </button>
+          )}
+          
+          {/* Next Arrow */}
+          {hasNext && (
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                goToNext();
+              }}
+              className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 md:w-14 md:h-14 rounded-full bg-foreground/80 hover:bg-foreground flex items-center justify-center transition-all hover:scale-110 z-50"
+            >
+              <CaretRight size={32} className="text-background" weight="bold" />
+            </button>
+          )}
+
           <div
             className="bg-card rounded-sm max-w-4xl w-full max-h-[90vh] overflow-y-auto relative"
             onClick={(e) => e.stopPropagation()}
@@ -305,11 +346,11 @@ export default function HouseCatalog() {
             </button>
 
             {/* Modal Content */}
-            <div className="p-8">
+            <div className="p-4 md:p-8">
               {/* Header */}
-              <div className="mb-6">
-                <div className="flex items-center gap-4 mb-2">
-                  <h2 className="text-3xl font-serif font-bold text-foreground">
+              <div className="mb-4 md:mb-6">
+                <div className="flex items-center gap-3 md:gap-4 mb-2 flex-wrap">
+                  <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground">
                     {selectedHouse.name}
                   </h2>
                   <span className="px-3 py-1 bg-primary text-primary-foreground rounded-sm text-sm font-bold">
@@ -319,7 +360,7 @@ export default function HouseCatalog() {
               </div>
 
               {/* Image */}
-              <div className="relative w-full h-[500px] mb-6 rounded-sm overflow-hidden bg-muted/50">
+              <div className="relative w-full h-[300px] md:h-[500px] mb-4 md:mb-6 rounded-sm overflow-hidden bg-muted/50">
                 <Image
                   src={selectedHouse.image}
                   alt={selectedHouse.name}
@@ -336,64 +377,64 @@ export default function HouseCatalog() {
               </div>
 
               {/* Specs Grid */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-                <div className="flex items-start gap-3">
+              <div className="grid grid-cols-2 gap-4 md:gap-6">
+                <div className="flex items-start gap-2 md:gap-3">
                   <HouseIcon
-                    size={24}
+                    size={20}
                     className="text-primary flex-shrink-0 mt-1"
                     weight="duotone"
                   />
                   <div>
-                    <p className="text-sm text-muted-foreground mb-1">
+                    <p className="text-xs md:text-sm text-muted-foreground mb-1">
                       Área Bruta Interior
                     </p>
-                    <p className="text-lg font-semibold text-foreground">
+                    <p className="text-base md:text-lg font-semibold text-foreground">
                       {selectedHouse.areaBrutaInterior}
                     </p>
                   </div>
                 </div>
 
-                <div className="flex items-start gap-3">
+                <div className="flex items-start gap-2 md:gap-3">
                   <RulerIcon
-                    size={24}
+                    size={20}
                     className="text-primary flex-shrink-0 mt-1"
                     weight="duotone"
                   />
                   <div>
-                    <p className="text-sm text-muted-foreground mb-1">
+                    <p className="text-xs md:text-sm text-muted-foreground mb-1">
                       Área Total
                     </p>
-                    <p className="text-lg font-semibold text-foreground">
+                    <p className="text-base md:text-lg font-semibold text-foreground">
                       {selectedHouse.areaTotal}
                     </p>
                   </div>
                 </div>
 
-                <div className="flex items-start gap-3">
+                <div className="flex items-start gap-2 md:gap-3">
                   <BathtubIcon
-                    size={24}
+                    size={20}
                     className="text-primary flex-shrink-0 mt-1"
                     weight="duotone"
                   />
                   <div>
-                    <p className="text-sm text-muted-foreground mb-1">WC</p>
-                    <p className="text-lg font-semibold text-foreground">
+                    <p className="text-xs md:text-sm text-muted-foreground mb-1">WC</p>
+                    <p className="text-base md:text-lg font-semibold text-foreground">
                       {selectedHouse.wc}
                     </p>
                   </div>
                 </div>
 
-                <div className="flex items-start gap-3">
+                <div className="flex items-start gap-2 md:gap-3">
                   <HouseIcon
-                    size={24}
+                    size={20}
                     className="text-primary flex-shrink-0 mt-1"
                     weight="duotone"
                   />
                   <div>
-                    <p className="text-sm text-muted-foreground mb-1">
+                    <p className="text-xs md:text-sm text-muted-foreground mb-1">
                       Tipologia
                     </p>
-                    <p className="text-lg font-semibold text-foreground">
+                    <p className="text-base md:text-lg font-semibold text-foreground">
                       {selectedHouse.tipologia}
                     </p>
                   </div>
@@ -402,7 +443,8 @@ export default function HouseCatalog() {
             </div>
           </div>
         </div>
-      )}
+        );
+      })()}
     </div>
   );
 }

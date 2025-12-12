@@ -181,7 +181,7 @@ export default function ProjectSection() {
         </div>
 
         {/* Filter Buttons */}
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-12">
+        {/* <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-12">
           <button
             onClick={() => setFilter("Todos")}
             className={`px-8 py-4 border-2 rounded-sm font-semibold text-base transition-all duration-300 ${
@@ -212,7 +212,7 @@ export default function ProjectSection() {
           >
             Projectos com LSF
           </button>
-        </div>
+        </div> */}
       </div>
 
       {/* Gallery Modal */}

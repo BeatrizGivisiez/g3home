@@ -113,8 +113,8 @@ export default function ProjectGalleryModal({
         </div>
 
         {/* Image Container */}
-        <div className="flex-1 flex items-center justify-center px-6 md:px-8 pb-24">
-            <div className="relative w-full max-w-7xl h-[75vh] bg-muted/10 rounded-lg overflow-hidden flex items-center justify-center">
+        <div className="flex-1 flex items-center justify-center px-4 md:px-8 pb-6">
+            <div className="relative w-full max-w-7xl h-[70vh] md:h-[75vh] bg-muted/10 rounded-lg overflow-hidden flex items-center justify-center">
               <Image
                 src={project.gallery[currentImageIndex]}
                 alt={`${project.title} - Imagem ${currentImageIndex + 1}`}
@@ -124,67 +124,33 @@ export default function ProjectGalleryModal({
                 sizes="(max-width: 768px) 100vw, 80vw"
               />
             </div>
-
         </div>
 
-        {/* Navigation Controls - Fixed Bottom */}
-        <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6 bg-gradient-to-t from-foreground/90 to-transparent">
-          <div className="flex items-center gap-4 max-w-7xl mx-auto">
-              {/* Previous Button */}
-              <button
-                onClick={onPrevImage}
-                disabled={currentImageIndex === 0}
-                className="w-10 h-10 flex items-center justify-center rounded-full bg-primary hover:bg-accent transition-colors disabled:opacity-30 disabled:cursor-not-allowed flex-shrink-0"
-                aria-label="Imagem anterior"
-              >
-                <CaretLeftIcon size={20} className="text-primary-foreground" weight="bold" />
-              </button>
+        {/* Side Navigation Arrows */}
+        {currentImageIndex > 0 && (
+          <button
+            onClick={onPrevImage}
+            className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 md:w-14 md:h-14 flex items-center justify-center rounded-full bg-primary hover:bg-accent transition-all hover:scale-110 z-20"
+            aria-label="Imagem anterior"
+          >
+            <CaretLeftIcon size={28} className="text-primary-foreground" weight="bold" />
+          </button>
+        )}
+        
+        {currentImageIndex < project.gallery.length - 1 && (
+          <button
+            onClick={onNextImage}
+            className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 md:w-14 md:h-14 flex items-center justify-center rounded-full bg-primary hover:bg-accent transition-all hover:scale-110 z-20"
+            aria-label="Próxima imagem"
+          >
+            <CaretRightIcon size={28} className="text-primary-foreground" weight="bold" />
+          </button>
+        )}
 
-              {/* Image Counter & Thumbnails */}
-              <div className="flex-1 flex flex-col items-center gap-3">
-                <div className="text-background/90 font-medium text-sm">
-                  {currentImageIndex + 1} / {project.gallery.length}
-                </div>
-                
-                {/* Thumbnail Navigation */}
-                <div className="flex gap-2 overflow-x-auto scrollbar-hide">
-                  {project.gallery.map((img, index) => (
-                    <button
-                      key={index}
-                      onClick={() => {
-                        const diff = index - currentImageIndex;
-                        if (diff > 0) {
-                          for (let i = 0; i < diff; i++) onNextImage();
-                        } else if (diff < 0) {
-                          for (let i = 0; i < Math.abs(diff); i++) onPrevImage();
-                        }
-                      }}
-                      className={`relative w-16 h-16 flex-shrink-0 rounded-sm overflow-hidden border-2 transition-all ${
-                        index === currentImageIndex
-                          ? "border-primary scale-105"
-                          : "border-transparent opacity-60 hover:opacity-100"
-                      }`}
-                    >
-                      <Image
-                        src={img}
-                        alt={`Miniatura ${index + 1}`}
-                        fill
-                        className="object-cover"
-                      />
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              {/* Next Button */}
-              <button
-                onClick={onNextImage}
-                disabled={currentImageIndex === project.gallery.length - 1}
-                className="w-10 h-10 flex items-center justify-center rounded-full bg-primary hover:bg-accent transition-colors disabled:opacity-30 disabled:cursor-not-allowed flex-shrink-0"
-                aria-label="Próxima imagem"
-              >
-                <CaretRightIcon size={20} className="text-primary-foreground" weight="bold" />
-              </button>
+        {/* Image Counter - Bottom Center */}
+        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 px-4 py-2 bg-foreground/80 backdrop-blur-sm rounded-full">
+          <div className="text-background font-medium text-sm">
+            {currentImageIndex + 1} / {project.gallery.length}
           </div>
         </div>
       </div>
